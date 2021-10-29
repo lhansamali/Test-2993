@@ -1,3 +1,11 @@
-New test.
-Tesing Github event.
-Testing.....
+ there are business services that cmdb shows to Bigpanda. But it shows Business Services which have appended with "syscode - System" but some of these  Business services are not in the CMDB table. We can't find which table that  BigPanda refers to fetch these business services with appended name.
+ Name :Charles Maier 
+Email: charles.maier@servicenow.com
+Phone : +16692622019 / +19175977967
+
+
+Today we deployed new update set in sandbox.then I have executed cmdbloader script to check whether changes are applied.(pushed last 33 days data)
+then I observed these:
+ 500 internal error for XDPS which has muliple records with same id.
+Aplications which have isSystem=true (CodeTrack application) are pushed to both business service and Application service. Application name is appended with <appCode - APP>
+ And wth the latest rapdev deployment, verified service offering record get data the same as the parent BS
