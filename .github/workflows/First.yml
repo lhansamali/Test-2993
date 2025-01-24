@@ -1,15 +1,16 @@
-name: 'Request Reviewers'
+name: Add Reviewers
 
 on:
   pull_request:
-    types: ['opened', 'labeled', 'labeled']
 
 jobs:
-  add-reviews:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Request Reviewers
-        uses: neo-diego-beltran/request-reviewers@f028375d516d93d6a4dd5f93feccfc7f3c768a9b
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          config_path: ".github/request-reviewers.yml"
+    - name: Add Reviewers
+      uses: madrapps/add-reviewers@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        reviewers: SongRaein
+        re-request-when-approved: true
+        re-request-when-changes-requested: true
