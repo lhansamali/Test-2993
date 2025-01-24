@@ -1,0 +1,24 @@
+who:
+  - label: TEAM_A_LABEL
+    assign:
+      teams:
+        - TeamA1
+      individuals:
+        - SongRaein
+  - label: TEAM_B_LABEL
+    assign:
+      teams:
+        - TeamB1
+      individuals:
+        - ReviewerB1
+        - ReviewerB2
+  - label: TEAM_C_LABEL
+    assign:
+      individuals:
+        - ReviewerC1
+        - ReviewerC2
+  - label: TEAM_D_LABEL
+    assign:
+      teams:
+        - TeamD1
+        - TeamD2
