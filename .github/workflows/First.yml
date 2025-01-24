@@ -6,14 +6,11 @@ jobs:
   job1:
     name: First_job
     runs-on: ubuntu-latest
-    steps:
+    steps:   
       - name: step one
-        uses: actions/checkout@v3
-        
-      - name: step two
-        uses: andymckay/assign-reviewers@v1.0.1
+        uses: kentaro-m/auto-assign-action@v2.2.0
         with:
-          reviewers: |
+          reviewers: |    
             - SongRaein
 
       - name: step three
