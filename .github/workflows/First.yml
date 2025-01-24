@@ -1,17 +1,18 @@
-name: first
+name: Assign Reviewers on PR Open
+
 on:
   pull_request:
     types: [opened]
+
 jobs:
-  job1:
-    name: First_job
+  assign-reviewers:
     runs-on: ubuntu-latest
-    steps:   
-      - name: step one
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Assign reviewers
         uses: zattoo/reviewers@4.1.0
         with:
-          reviewers: |    
-            - SongRaein
-
-      - name: step three
-        run: echo "Added Reviewer"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owners_path: ".github/workflows/reviewers.json"
