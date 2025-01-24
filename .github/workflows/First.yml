@@ -1,18 +1,15 @@
-  name: Reviewers
+name: 'Request Reviewers'
 
-  on:
-      pull_request_review:
-      pull_request:
-          types: [opened]
+on:
+  pull_request:
+    types: ['opened', 'labeled', 'labeled']
 
-  jobs:
-      reviewers:
-          name: Reviewers
-          runs-on: ubuntu-latest
-          steps:
-              - uses: actions/checkout@v2
-              - uses: zattoo/reviewers@4.1.0
-                with:
-                    token: ${{secrets.TOKEN}}
-                    source: '.reviewers.json'
-                    path: '.github/workflows/reviewers.json'
+jobs:
+  add-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request Reviewers
+        uses: neo-diego-beltran/request-reviewers@f028375d516d93d6a4dd5f93feccfc7f3c768a9b
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          config_path: ".github/request-reviewers.yml"
