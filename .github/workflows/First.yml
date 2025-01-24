@@ -15,6 +15,5 @@ jobs:
         uses: zattoo/reviewers@4.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          source: main
-          owners_path: ".github/workflows/reviewers.json"
-          ignore: false
+          source: 'main'
+          owners_path: '.github/workflows/reviewers.json'
