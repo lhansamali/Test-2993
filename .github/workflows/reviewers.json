@@ -2,7 +2,7 @@
   "rules": [
     {
       "labels": ["bug"],
-      "reviewers": ["SongRaein", "reviewer2"]
+      "reviewers": ["SongRaein"]
     },
     {
       "labels": ["feature"],
