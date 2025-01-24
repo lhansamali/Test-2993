@@ -1,20 +1,18 @@
-name: Assign Reviewers on PR Open
+  name: Reviewers
 
-on:
-  pull_request:
-    types: [opened]
+  on:
+      pull_request_review:
+      pull_request:
+          types: [opened]
 
-jobs:
-  assign-reviewers:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Auto Reviewers
-        uses: zattoo/reviewers@4.1.0
-        with:
-             token: ${{ secrets.GITHUB_TOKEN }}
-             source: 'main'
-             owners_path: '.github/workflows/reviewers.json'
-          
+  jobs:
+      reviewers:
+          name: Reviewers
+          runs-on: ubuntu-latest
+          steps:
+              - uses: actions/checkout@v2
+              - uses: zattoo/reviewers@levels
+                with:
+                    token: ${{secrets.TOKEN}}
+                    source: '.reviewers.json'
+                    path: '.github/workflows/reviewers.json'
