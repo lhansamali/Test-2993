@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "labels": ["bug"],
+      "reviewers": ["reviewer1", "reviewer2"]
+    },
+    {
+      "labels": ["feature"],
+      "reviewers": ["reviewer3"]
+    }
+  ]
+}
