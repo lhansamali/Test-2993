@@ -17,4 +17,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           source: main
           owners_path: ".github/workflows/reviewers.json"
-          ignore: ""
