@@ -11,7 +11,7 @@
           runs-on: ubuntu-latest
           steps:
               - uses: actions/checkout@v2
-              - uses: zattoo/reviewers@levels
+              - uses: zattoo/reviewers@4.1.0
                 with:
                     token: ${{secrets.TOKEN}}
                     source: '.reviewers.json'
