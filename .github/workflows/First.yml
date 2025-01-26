@@ -4,13 +4,22 @@ on:
   pull_request:
 
 jobs:
-  build:
+  add-reviewers:
     runs-on: ubuntu-latest
     steps:
-    - name: Add Reviewers
-      uses: madrapps/add-reviewers@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        reviewers: SongRaein
-        re-request-when-approved: true
-        re-request-when-changes-requested: true
+      - name: Determine Reviewer
+        id: determine-reviewer
+        run: |
+          if [ "${{ github.actor }}" = "lhansamali" ]; then
+            echo "reviewer=SongRaein" >> $GITHUB_ENV
+          else
+            echo "reviewer=lhansamali" >> $GITHUB_ENV
+          fi
+
+      - name: Add Reviewers
+        uses: madrapps/add-reviewers@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          reviewers: ${{ env.reviewer }}
+          re-request-when-approved: true
+          re-request-when-changes-requested: true
