@@ -1,15 +1,22 @@
 name: AutoAssignment
 
 on:
-    pull_request:
-        types: [opened]
+  pull_request:
+    types: [opened]
 
 jobs:
-    assignment:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: kyoya0819/auto-assignment@v1
-              with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  users: '["lhansamali"]'
+  assignment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Get Pull Request Owner
+        id: get-pr-owner
+        run: echo "pr_owner=${{ github.actor }}" >> $GITHUB_ENV
+
+      - name: Assign PR Owner
+        uses: kyoya0819/auto-assignment@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          users: ${{ env.pr_owner }}
