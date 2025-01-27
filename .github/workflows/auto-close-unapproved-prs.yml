@@ -1,0 +1,44 @@
+name: Auto-Close Unapproved PRs
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  auto-close-unapproved:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for 1 Minute
+        run: sleep 60
+
+      - name: Check and Close PR
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pull_number = context.payload.pull_request.number;
+
+            // Get PR reviews
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner,
+              repo,
+              pull_number,
+            });
+
+            // Check if any review is approved
+            const isApproved = reviews.some(review => review.state === 'APPROVED');
+
+            if (!isApproved) {
+              // Close the PR if not approved
+              await github.rest.pulls.update({
+                owner,
+                repo,
+                pull_number,
+                state: 'closed',
+              });
+              console.log(`Pull request #${pull_number} was closed because it was not approved.`);
+            } else {
+              console.log(`Pull request #${pull_number} is approved.`);
+            }
