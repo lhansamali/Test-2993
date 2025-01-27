@@ -1,0 +1,37 @@
+name: Add Reviewers
+
+on:
+  pull_request:
+
+env:
+  USER_1: lhansamali
+  USER_2: SongRaein
+
+jobs:
+  add-reviewers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine Reviewer and Assign
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prOwner = context.payload.pull_request.user.login;
+            const reviewers = [];
+            if (prOwner === process.env.USER_1) {
+              reviewers.push(process.env.USER_2);
+            } else if (prOwner === process.env.USER_2) {
+              reviewers.push(process.env.USER_1);
+            }
+
+            if (reviewers.length > 0) {
+              await github.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                reviewers: reviewers,
+              });
+              console.log(`Assigned reviewers: ${reviewers}`);
+            } else {
+              console.log('No reviewers assigned. PR owner does not match predefined users.');
+            }
